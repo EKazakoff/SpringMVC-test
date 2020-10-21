@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>get account form</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submitBtn").click(function () {
+                var getParams = {
+                    "id": $("#accountId").val()
+                };
+                $.getJSON("/spring_mvc_template_war_exploded/rest/get/account", getParams, function (data) {
+                    console.log(data); var items = [];
+                    $.each(data, function (key, val) {
+                        items.push("<li id='" + key + "'>" + val + "</li>");
+                    });
+
+                    $("<ul/>", {
+                        "class": "my-new-list",
+                        html: items.join("")
+                    }).appendTo("body");
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<form id="accountForm">
+    <label>Account Id:</label>
+    <input type="text" name="first-name" id="accountId">
+    <button type="button" id="submitBtn">get account</button>
+</form>
+
+</body>
+</html>
