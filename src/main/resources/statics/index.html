@@ -13,7 +13,7 @@
                 $.getJSON("/spring_mvc_template_war_exploded/rest/get/account", getParams, function (data) {
                     console.log(data); var items = [];
                     $.each(data, function (key, val) {
-                        items.push("<li id='" + key + "'>" + val + "</li>");
+                        items.push("<li id='" + key + "'>" + key + ':' + val + "</li>");
                     });
 
                     $("<ul/>", {
