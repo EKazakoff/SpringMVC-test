@@ -22,10 +22,10 @@ public class MyRestController {
     @Autowired
     AccountEntityCRUD accountEntityCRUD;
 
-// TODO: преобразовать метод так что бы он возвращал JSON(см.ниже). Использовать Джексон.
+// TODO: преобразовать метод так что бы он возвращал JSON(см.ниже). Использовать Jackson.
     @GetMapping(path = "/get/account", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getAccount(@RequestParam Integer id) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper(); // Jackson ObjectMapper
         //Object to JSON in String
         String jsonInString = mapper.writeValueAsString(accountEntityCRUD.read(id));
         return ResponseEntity.ok().body(jsonInString);

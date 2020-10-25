@@ -5,7 +5,7 @@
              version="2.1">
     <persistence-unit name="AccountsUnit" transaction-type="RESOURCE_LOCAL">
         <description>Hibernate EntityManager Demo</description>
-        <class>jpa.AccountsEntity</class>
+        <class>com.test.jpa.AccountsEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>

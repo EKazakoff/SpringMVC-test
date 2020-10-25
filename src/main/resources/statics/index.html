@@ -1,30 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>get account form</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#submitBtn").click(function () {
-                var getParams = {
-                    "id": $("#accountId").val()
+<!DOCTYPE html> <!--артефакт, который должен быть включен для того, что бы все работало правильно.-->
+<html lang="en"> <!--элемент оборачивает весь контент на всей странице, и иногда известен как корневой элемент.-->
+<head> <!--элемент выступает в качестве контейнера для всего, что вы пожелаете включить на HTML страницу, но не являющегося контентом, который вы показываете пользователям вашей страницы-->
+    <meta charset="utf-8"> <!--элемент устанавливает UTF-8 кодировку вашего документа, которая включает в себя большинство символов из всех известных языков.-->
+    <title>get account form</title><!--элемент устанавливает заголовок для вашей страницы, который является названием, появляющимся на вкладке браузера загружаемой страницы, и используется для описания страницы, когда вы добавляете ее в закладки/избранное.-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!--скачивание jquery-->
+    <style type="text/css">
+        .my-new-list { background-color:#eee;border-collapse:collapse; }
+        .my-new-list th { background-color:#000;color:white;width:50%; }
+        .my-new-list td, .my-new-list th { padding:5px;border:1px solid #000; }
+    </style>
+    <script> <!-- используется для встраивания или подключения исполняемого JavaScript кода.-->
+        $(document).ready(function () { <!--jQuery DOM метод(ready): как только jquery обнаружит состояние готовности JS всей страницы, включая DOM, происходит вызов селектора #submitBtn -->
+            $("#submitBtn").click(function () { <!--jQuery DOM метод(click): задаем функцию (function) при клике левой кнопкой мыши по кнопке-->
+                var getParams = { <!--оператор var объявляет и инициализует переменную getParams-->
+                    "id": $("#accountId").val() <!--jQuery DOM метод(val):получение текущего значения соответствующее id атрибута -->
                 };
-                $.getJSON("/spring_mvc_template_war_exploded/rest/get/account", getParams, function (data) {
-                    console.log(data); var items = [];
-                    $.each(data, function (key, val) {
-                        items.push("<li id='" + key + "'>" + key + ':' + val + "</li>");
+                $.getJSON("/spring_mvc_template_war_exploded/rest/get/account", getParams, function (data) { <!--вызов из сервера метода getJSON по урлу, отправляемый объкт серверу-getParams(id), ответ callback с результирующими данными от сервера -->
+                    console.log(data); <!--вывод записи в консоль вэба -->
+                    var items = []; <!--объявление переменной items -->
+                        items.push("<tr> <th> parameter </th> <th> value <th/>  </tr>");
+                    $.each(data, function (key, val) { <!--перебор элементов массива items -->
+                        items.push("<tr id='" + key + "'>" + "<td>" + key + "</td>" + ':' + "<td>" + val + "</td>" + "</tr>"); <!--добавление эл-тов в массив -->
                     });
 
-                    $("<ul/>", {
+                    $("<table/>", {
                         "class": "my-new-list",
                         html: items.join("")
                     }).appendTo("body");
                 });
             });
         });
-    </script>
-</head>
+    </script> <!--используется для встраивания или подключения исполняемого JavaScript кода. -->
+</head> <!--элемент выступает в качестве контейнера для всего, что вы пожелаете включить на HTML страницу, но не являющегося контентом, который вы показываете пользователям вашей страницы -->
 <body>
 <form id="accountForm">
     <label>Account Id:</label>
